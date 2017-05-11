@@ -64,6 +64,9 @@ public class MainActivityFragment extends Fragment {
     private ImageView fighterImageView; //Изображение бойца
     private LinearLayout[] guessLinearLayouts; //Строки с кнопками и ячейками
     private TextView answerTextView;
+    Button buttonSteer;
+    Button buttonDelete;
+    Button buttonNext;
 
 
     @Override
@@ -76,7 +79,25 @@ public class MainActivityFragment extends Fragment {
 
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.incorrect_shake);
         shakeAnimation.setRepeatCount(3);
+
+        quizLinearLayout = (LinearLayout) view.findViewById(R.id.quizLinearLayout);
+        fighterImageView = (ImageView) view.findViewById(R.id.fighterImageView);
         answerTextView = (TextView) view.findViewById(R.id.answerTextView);
+        buttonDelete = (Button) view.findViewById(R.id.buttonDelete);
+        buttonSteer = (Button) view.findViewById(R.id.buttonSteer);
+        buttonNext = (Button) view.findViewById(R.id.buttonNext);View.OnClickListener onClickButton = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                switch (v.getId()){
+                    case R.id.buttonSteer:
+                        Steer();
+                        break;
+                    case R.id.buttonDelete:
+                        deleteLetter();
+                        break;
+                }
+            }
+        };
 
         return view;
     }
@@ -91,7 +112,7 @@ public class MainActivityFragment extends Fragment {
     public void handleClicks(View v, int counter) {
         int buttonId  = getResources().getIdentifier("cell" + 1, "id", getActivity().getPackageName());
         Button resetButton  = (Button) getView().findViewById(buttonId);
-        for(int i = 0;i<8;i++) {
+        for(int i = 0;i<12;i++) {
             if (resetButton.getVisibility() == View.VISIBLE) {
                 buttonId  = getResources().getIdentifier("cell" + (i+1), "id", getActivity().getPackageName());
                 resetButton = (Button) getView().findViewById(buttonId);
@@ -112,6 +133,29 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
+    public void Steer(){
+        int buttonId = getResources().getIdentifier("cell" + 1, "id", getActivity().getPackageName());
+        Button resetButton = (Button) getView().findViewById(buttonId);
+        for(int i = 0; i < 8; i++) {
+            if(resetButton.getVisibility() == View.VISIBLE) {
+                buttonId = getResources().getIdentifier("cell" + (i + 1), "id", getActivity().getPackageName());
+                resetButton = (Button) getView().findViewById(buttonId);
+            }
+        }
+        int pressedButtonId = getResources().getIdentifier("button" + array.get(getSteerRandom()), "id", getActivity().getPackageName());
+        Button pressedButton = (Button) getView().findViewById(pressedButtonId);
+        buttonsData.add(getCounter(), String.valueOf(pressedButtonId)); //ID кнопки снизу
+        buttonsData2.add(getCounter(), String.valueOf(buttonId)); //ID кнопки снизу
+        resetButton.setVisibility(View.VISIBLE);
+        pressedButton.setVisibility(View.INVISIBLE);
+        String buttonText = pressedButton.getText().toString();
+        resetButton.setText(String.valueOf(buttonText));
+        if(getCounter() == (getFightersName().length() - 1))
+        {
+            checkName();
+        }
+        setCounter(getCounter() + 1);
+    }
     public void checkName()
     {
         String temp = "";
@@ -127,6 +171,7 @@ public class MainActivityFragment extends Fragment {
             if (getFightersName().substring(1).equalsIgnoreCase(temp)) {
                 checkAnswer = true;
                 answerTextView.setText("RIGHT");
+                animate(checkAnswer);
 
             }
 
@@ -289,6 +334,12 @@ public class MainActivityFragment extends Fragment {
                     }
             );
         }
+        else {
+            animator = ViewAnimationUtils.createCircularReveal(
+                    quizLinearLayout, centerX, centerY, 0, radius);
+        }
+        animator.setDuration(500); //продолжительность анимации 500 мс
+        animator.start(); //начало анимации
     }
 
 }

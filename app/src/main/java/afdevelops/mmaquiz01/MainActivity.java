@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity {
             //запускает quiz после того, как изменились настройки(В КНИГЕ НАПИСАНО, ЧТО ЗАПУСКАЕТ ПОСЛЕ ИЗМЕНЕНИЯ НАСТРОЕК, НО НАСТРОЕК У НАС НЕТ, ПОЭТОМУ ЗАПУСКАЕТ В ЗАВИСИМОСТИ ОТ ПЕРЕМЕННОЙ fightersNumber(в блокноте записана как "l"))
             MainActivityFragment quizFragment = (MainActivityFragment)
                     getSupportFragmentManager().findFragmentById(R.id.quizFragment);
-            quizFragment.updateGuessRows(PreferenceManager.getDefaultSharedPreferences(this));
-            quizFragment.updateCategories(PreferenceManager.getDefaultSharedPreferences(this));
+            quizFragment.setLetters();
             quizFragment.resetQuiz();
             preferencesChanged = false;  // когда игрок угадывает, изменить эту переменную и переменные номеров категорий и бойцов
 
@@ -72,14 +71,5 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent preferencesIntent = new Intent(this, SettingsActivity.class);
-        startActivity(preferencesIntent);
-        return super.onOptionsItemSelected(item);
-    }
-
-
 
 }
