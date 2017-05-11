@@ -86,6 +86,7 @@ public class MainActivityFragment extends Fragment {
         setCounter(getCounter() + 1);
     }
 
+    private boolean checkAnswer;
 
     public void handleClicks(View v, int counter) {
         int buttonId  = getResources().getIdentifier("cell" + 1, "id", getActivity().getPackageName());
@@ -106,8 +107,9 @@ public class MainActivityFragment extends Fragment {
         pressedButton.setVisibility(View.INVISIBLE);
         String buttonText = pressedButton.getText().toString();
         resetButton.setText(String.valueOf(buttonText));
-        if(counter == (getFightersName().length()-2))
+        if(counter == (getFightersName().length()-2)) {
             checkName();
+        }
     }
 
     public void checkName()
@@ -123,6 +125,7 @@ public class MainActivityFragment extends Fragment {
             }
 
             if (getFightersName().substring(1).equalsIgnoreCase(temp)) {
+                checkAnswer = true;
                 answerTextView.setText("RIGHT");
 
             }
@@ -258,12 +261,34 @@ public class MainActivityFragment extends Fragment {
         try(InputStream stream = assets.open(categoryList.get((fightersNumber - (fightersNumber % 11)) / 11) + "/" + nextImage + ".jpg")){
             Drawable fighter = Drawable.createFromStream(stream, nextImage);
             fighterImageView.setImageDrawable(fighter);
+            fightersNumber++;
             animate(false);
         }
         catch (IOException exception) {
             Log.e(TAG, "Error loading " + nextImage, exception);
         }
         Collections.shuffle(fileNameList);
+    }
+
+    private void animate(boolean animateOut){
+        if(checkAnswer == false){
+            return;
+        }
+        int centerX = (quizLinearLayout.getLeft() + quizLinearLayout.getRight()) / 2;
+        int centerY = (quizLinearLayout.getTop() + quizLinearLayout.getBottom()) / 2;
+        int radius = Math.max(quizLinearLayout.getWidth(), quizLinearLayout.getHeight());
+        Animator animator;
+        if(animateOut) {
+            animator = ViewAnimationUtils.createCircularReveal(quizLinearLayout, centerX, centerY, radius, 0);
+            animator.addListener(
+                    new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            loadNextFighter();
+                        }
+                    }
+            );
+        }
     }
 
 }
