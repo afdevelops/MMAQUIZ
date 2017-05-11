@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MMAQUIZ0.1</string>
+    <string name="action_settings">Settings</string>
+    <string name="number_of_cells">Number of Cells</string>
+    <string name="number_of_cells_description">Display the name</string>
+    <string name="fighters_categories">Categories</string>
+    <string name="fighters_categories_description">Categories to include in the quiz</string>
+    <string name="guess_fighter">Guess the fighter</string>
+    <string name="results">%1$d guesses, %2$.02f%% correct</string>
+    <string name="incorrect_answer">Incorrect!</string>
+    //default fighters name
+    //restarting quiz
+    <string name="fighter">Display the name of the level</string>
+    //reset quiz
+    <string name="image_description">Image of the current fighter in the quiz</string>
+    <string name="default_category">FLYWEIGHT</string>
+    <string name="title_activity_settings">Settings</string>
+</resources>
