@@ -23,7 +23,14 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String CATEGORIES = "pref_categoriesToInclude"; //мб не нужна
+    //public static final String CATEGORIES = "pref_categoriesToInclude"; //мб не нужна
+    private int fightersNumber1;
+    public int getFightersNumber1() {
+        return fightersNumber1;
+    }
+    public void setFightersNumber1(int number){
+        this.fightersNumber1 = number;
+    }
     private boolean phoneDevice = true; //включение портретной ориентации
     private boolean preferencesChanged = true;
 
@@ -53,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
             //запускает quiz после того, как изменились настройки(В КНИГЕ НАПИСАНО, ЧТО ЗАПУСКАЕТ ПОСЛЕ ИЗМЕНЕНИЯ НАСТРОЕК, НО НАСТРОЕК У НАС НЕТ, ПОЭТОМУ ЗАПУСКАЕТ В ЗАВИСИМОСТИ ОТ ПЕРЕМЕННОЙ fightersNumber(в блокноте записана как "l"))
             MainActivityFragment quizFragment = (MainActivityFragment)
                     getSupportFragmentManager().findFragmentById(R.id.quizFragment);
-            quizFragment.setLetters();
             quizFragment.resetQuiz();
-            preferencesChanged = false;  // когда игрок угадывает, изменить эту переменную и переменные номеров категорий и бойцов
+            quizFragment.setLetters();
 
         }
     }

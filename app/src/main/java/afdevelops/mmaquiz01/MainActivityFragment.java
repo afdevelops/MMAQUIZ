@@ -52,18 +52,18 @@ public class MainActivityFragment extends Fragment {
     public void setCounter(int count){
         this.counter = count;
     }
-    private List<String> categoryList;
+    private List<String> categoryList = new ArrayList<>();
+    private int fightersNumber;
 
     private List<String> buttonsData = new ArrayList<>();
     private List<String> buttonsData2 = new ArrayList<>();
-    private int fightersNumber;
     private Handler handler; //для задержки запуска следующего бойца. Но я думаю, он нам не понадобится, потому что переход будет осуществляться кликом.
     private Animation shakeAnimation; //анимация неправильного заполнения
 
     private LinearLayout quizLinearLayout; //Макет с quiz'ом
     private ImageView fighterImageView; //Изображение бойца
-    private LinearLayout[] guessLinearLayouts; //Строки с кнопками и ячейками
     private TextView answerTextView;
+    private LinearLayout[] guessLinearLayouts; //ряды с кнопками для выбора букв
     Button buttonSteer;
     Button buttonDelete;
     Button buttonNext;
@@ -82,10 +82,15 @@ public class MainActivityFragment extends Fragment {
 
         quizLinearLayout = (LinearLayout) view.findViewById(R.id.quizLinearLayout);
         fighterImageView = (ImageView) view.findViewById(R.id.fighterImageView);
+        guessLinearLayouts = new LinearLayout[3];
+        guessLinearLayouts[0] = (LinearLayout) view.findViewById(R.id.row2LinearLayout);
+        guessLinearLayouts[1] = (LinearLayout) view.findViewById(R.id.row3LinearLayout);
+        guessLinearLayouts[2] = (LinearLayout) view.findViewById(R.id.row1LinearLayout);
         answerTextView = (TextView) view.findViewById(R.id.answerTextView);
         buttonDelete = (Button) view.findViewById(R.id.buttonDelete);
         buttonSteer = (Button) view.findViewById(R.id.buttonSteer);
-        buttonNext = (Button) view.findViewById(R.id.buttonNext);View.OnClickListener onClickButton = new View.OnClickListener(){
+        buttonNext = (Button) view.findViewById(R.id.buttonNext);
+        View.OnClickListener onClickButton = new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 switch (v.getId()){
@@ -98,6 +103,8 @@ public class MainActivityFragment extends Fragment {
                 }
             }
         };
+        buttonSteer.setOnClickListener(onClickButton);
+        buttonDelete.setOnClickListener(onClickButton);
 
         return view;
     }
@@ -128,7 +135,7 @@ public class MainActivityFragment extends Fragment {
         pressedButton.setVisibility(View.INVISIBLE);
         String buttonText = pressedButton.getText().toString();
         resetButton.setText(String.valueOf(buttonText));
-        if(counter == (getFightersName().length()-2)) {
+        if(counter == (getFightersName().length()-1)) {
             checkName();
         }
     }
@@ -136,7 +143,7 @@ public class MainActivityFragment extends Fragment {
     public void Steer(){
         int buttonId = getResources().getIdentifier("cell" + 1, "id", getActivity().getPackageName());
         Button resetButton = (Button) getView().findViewById(buttonId);
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < 12; i++) {
             if(resetButton.getVisibility() == View.VISIBLE) {
                 buttonId = getResources().getIdentifier("cell" + (i + 1), "id", getActivity().getPackageName());
                 resetButton = (Button) getView().findViewById(buttonId);
@@ -193,20 +200,20 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void setLetters () {
-        char[] LastNameQuantity = getFightersName().toCharArray();
+        char[] LastNameQuantity = fightersName.toCharArray();
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         for (int i = 0; i < 14; i++)
         {
             Random r = new Random();
             int rand = r.nextInt(25);
             int buttonId = getResources().getIdentifier("button"+i, "id", getActivity().getPackageName());
-            Button b = (Button) getView().findViewById(buttonId);
+            Button b = (Button) quizLinearLayout.findViewById(buttonId);
             b.setText(String.valueOf(alphabet[rand]));
         }
         for (int j = 1; j < LastNameQuantity.length; j++)
         {
             int buttonId = getResources().getIdentifier("button" + getRandom(), "id", getActivity().getPackageName());
-            Button b = (Button) getView().findViewById(buttonId);
+            Button b = (Button) quizLinearLayout.findViewById(buttonId);
             b.setText(String.valueOf(LastNameQuantity[j]));
 
         }
@@ -302,17 +309,25 @@ public class MainActivityFragment extends Fragment {
     private void loadNextFighter(){
         String nextImage = fileNameList.remove(0);
         setFightersName(nextImage);
+        String category = nextImage.substring(0, nextImage.indexOf('-'));
         AssetManager assets = getActivity().getAssets();
-        try(InputStream stream = assets.open(categoryList.get((fightersNumber - (fightersNumber % 11)) / 11) + "/" + nextImage + ".jpg")){
+        try(InputStream stream = assets.open(category + "/" + nextImage + ".jpg")){
             Drawable fighter = Drawable.createFromStream(stream, nextImage);
             fighterImageView.setImageDrawable(fighter);
-            fightersNumber++;
             animate(false);
         }
         catch (IOException exception) {
             Log.e(TAG, "Error loading " + nextImage, exception);
         }
         Collections.shuffle(fileNameList);
+        char[] LastNameQuantity = fightersName.toCharArray();
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        for(int row = 0; row < 2; row++) {
+            for(int b = 0; b < 7; b ++) {
+                Button newButton = (Button) guessLinearLayouts[row].getChildAt(b);
+                newButton.setEnabled(true);
+            }
+        }
     }
 
     private void animate(boolean animateOut){
@@ -341,5 +356,7 @@ public class MainActivityFragment extends Fragment {
         animator.setDuration(500); //продолжительность анимации 500 мс
         animator.start(); //начало анимации
     }
+
+    private void
 
 }
