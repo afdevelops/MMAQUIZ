@@ -56,14 +56,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        if(preferencesChanged){
             //запускает quiz после того, как изменились настройки(В КНИГЕ НАПИСАНО, ЧТО ЗАПУСКАЕТ ПОСЛЕ ИЗМЕНЕНИЯ НАСТРОЕК, НО НАСТРОЕК У НАС НЕТ, ПОЭТОМУ ЗАПУСКАЕТ В ЗАВИСИМОСТИ ОТ ПЕРЕМЕННОЙ fightersNumber(в блокноте записана как "l"))
             MainActivityFragment quizFragment = (MainActivityFragment)
                     getSupportFragmentManager().findFragmentById(R.id.quizFragment);
             quizFragment.resetQuiz();
-            quizFragment.setLetters();
 
-        }
     }
 
     @Override

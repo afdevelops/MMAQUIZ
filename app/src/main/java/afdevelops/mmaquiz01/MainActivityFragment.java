@@ -53,7 +53,6 @@ public class MainActivityFragment extends Fragment {
         this.counter = count;
     }
     private List<String> categoryList = new ArrayList<>();
-    private int fightersNumber;
 
     private List<String> buttonsData = new ArrayList<>();
     private List<String> buttonsData2 = new ArrayList<>();
@@ -105,7 +104,6 @@ public class MainActivityFragment extends Fragment {
         };
         buttonSteer.setOnClickListener(onClickButton);
         buttonDelete.setOnClickListener(onClickButton);
-
         return view;
     }
 
@@ -163,6 +161,8 @@ public class MainActivityFragment extends Fragment {
         }
         setCounter(getCounter() + 1);
     }
+
+
     public void checkName()
     {
         String temp = "";
@@ -199,40 +199,21 @@ public class MainActivityFragment extends Fragment {
 
     }
 
-    public void setLetters () {
-        char[] LastNameQuantity = fightersName.toCharArray();
-        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        for (int i = 0; i < 14; i++)
-        {
-            Random r = new Random();
-            int rand = r.nextInt(25);
-            int buttonId = getResources().getIdentifier("button"+i, "id", getActivity().getPackageName());
-            Button b = (Button) quizLinearLayout.findViewById(buttonId);
-            b.setText(String.valueOf(alphabet[rand]));
-        }
-        for (int j = 1; j < LastNameQuantity.length; j++)
-        {
-            int buttonId = getResources().getIdentifier("button" + getRandom(), "id", getActivity().getPackageName());
-            Button b = (Button) quizLinearLayout.findViewById(buttonId);
-            b.setText(String.valueOf(LastNameQuantity[j]));
 
-        }
-
-    }
 
     private List<Integer> array = new ArrayList<>();
     public int getRandom() {
 
-        int rnd = new Random().nextInt(13);
+        int rnd = new Random().nextInt(12);
         while(array.contains(rnd))
         {
-            rnd = new Random().nextInt(13);
+            rnd = new Random().nextInt(12);
         }
         array.add(rnd);
         return rnd;
     }
 
-    private List<Integer> arraySteer = new ArrayList<>();
+   private List<Integer> arraySteer = new ArrayList<>();
     public int getSteerRandom() {
         int rnd = new Random().nextInt(getFightersName().length());
         while(arraySteer.contains(rnd))
@@ -252,28 +233,6 @@ public class MainActivityFragment extends Fragment {
         this.fightersName = name;
     }
 
-    /*public void loadNamesOfFighters() {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(
-                    new InputStreamReader(getAssets().open("FightersInfo/FLYWEIGHT/ListOfFighters.txt")));
-            String fline;
-            while ((fline = reader.readLine()) != null) {
-                setFightersName(fline);
-            }
-        }catch (IOException ex) {
-
-        } finally{
-            if(reader != null)
-            {
-                try {
-                    reader.close();
-                } catch (IOException ex){
-
-                }
-            }
-        }
-    }*/
 
     public void deleteLetter(){ //метод для удаления одной буквы - подсказка. Нужно пользоваться методом getRandom() и сделать невидимой одну рандомную кнопку.
         int deletedButtonId = getResources().getIdentifier("button" + getRandom(), "id", getActivity().getPackageName());
@@ -320,13 +279,33 @@ public class MainActivityFragment extends Fragment {
             Log.e(TAG, "Error loading " + nextImage, exception);
         }
         Collections.shuffle(fileNameList);
-        char[] LastNameQuantity = fightersName.toCharArray();
-        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+
+        char[] LastNameQuantity = getFightersName().substring(getFightersName().indexOf('-') + 1, getFightersName().length()).toCharArray();
+        char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         for(int row = 0; row < 2; row++) {
             for(int b = 0; b < 7; b ++) {
+                Random r = new Random();
+                int rand = r.nextInt(25);
                 Button newButton = (Button) guessLinearLayouts[row].getChildAt(b);
                 newButton.setEnabled(true);
+                newButton.setText(String.valueOf(alphabet[rand]));
             }
+        }
+        for(int i = 0; i < LastNameQuantity.length; i++) {
+            int buttonRand = getRandom();
+            int row;
+            int buttonInRow;
+            if(buttonRand < 7) {
+                row = 0;
+                buttonInRow = buttonRand;
+            }
+            else {
+                row = 1;
+                buttonInRow = buttonRand - 7;
+            }
+            Button b = (Button) guessLinearLayouts[row].getChildAt(buttonInRow);
+            b.setEnabled(true);
+            b.setText(String.valueOf(LastNameQuantity[i]));
         }
     }
 
@@ -357,6 +336,5 @@ public class MainActivityFragment extends Fragment {
         animator.start(); //начало анимации
     }
 
-    private void
 
 }
