@@ -173,7 +173,7 @@ public class MainActivityFragment extends Fragment {
         int pressedButtonId = getResources().getIdentifier("button" + array.get(getSteerRandom()), "id", getActivity().getPackageName());
         Button pressedButton = (Button) getView().findViewById(pressedButtonId);
         buttonsData.add(getCounter(), String.valueOf(pressedButtonId)); //ID кнопки снизу
-        buttonsData2.add(getCounter(), String.valueOf(buttonId)); //ID кнопки снизу
+         //ID кнопки снизу
         resetButton.setVisibility(View.VISIBLE);
         pressedButton.setVisibility(View.INVISIBLE);
         String buttonText = pressedButton.getText().toString();
@@ -204,14 +204,12 @@ public class MainActivityFragment extends Fragment {
                 animate(checkAnswer);
 
             }
-
         }
     }
 
     public void handleCancel(View v)
     {
-        int downButtonId = Integer.valueOf(buttonsData.get(getCounter()-1));
-        int upButtonId = Integer.valueOf(buttonsData2.get(getCounter()-1));
+        int downButtonId = Integer.valueOf(buttonsData2.get(getCounter()-1));
         Button downButton = (Button) getView().findViewById(downButtonId);
         Button upButton = (Button) getView().findViewById(v.getId());
         downButton.setVisibility(View.VISIBLE); //To set visible
@@ -331,7 +329,7 @@ public class MainActivityFragment extends Fragment {
             b.setText(String.valueOf(LastNameQuantity[i]));
         }
     }
-
+// method
     private void animate(boolean animateOut){
         if(checkAnswer == false){
             return;

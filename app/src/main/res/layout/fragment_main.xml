@@ -64,7 +64,7 @@
             android:textColor="@color/button_text_color"
             android:textSize="10sp"
             android:visibility="invisible"
-            android:onClick="handleCancel"/>
+           />
 
         <Button
             android:text="2"
