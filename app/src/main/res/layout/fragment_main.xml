@@ -247,7 +247,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible"/>
+            />
 
         <Button
             android:text="2"
@@ -257,7 +257,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="3"
@@ -267,7 +267,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="4"
@@ -277,7 +277,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="5"
@@ -287,7 +287,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="6"
@@ -297,7 +297,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="7"
@@ -307,7 +307,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
     </LinearLayout>
 
     <LinearLayout
@@ -325,7 +325,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="9"
@@ -335,7 +335,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible"/>
+            />
 
         <Button
             android:text="10"
@@ -345,7 +345,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="11"
@@ -355,7 +355,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="12"
@@ -365,7 +365,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible"/>
+            />
 
         <Button
             android:text="13"
@@ -375,7 +375,7 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
 
         <Button
             android:text="14"
@@ -385,22 +385,22 @@
             android:layout_weight="1"
             android:textColor="@color/button_text_color"
             style="@android:style/Widget.Holo.Button"
-            android:onClick="makeVisible" />
+             />
     </LinearLayout>
-
-    <TextView
-        android:text="ANSWER"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:id="@+id/answerTextView"
-        android:textStyle="normal|bold"
-        android:textAlignment="center"
-        android:textSize="24sp" />
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:text="ANSWER"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:id="@+id/answerTextView"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:textSize="24sp" />
 
         <Button
             android:text="-1"
