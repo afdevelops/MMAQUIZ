@@ -54,8 +54,12 @@ public class MainActivityFragment extends Fragment {
     }
     private List<String> categoryList = new ArrayList<>();
 
+    private List<Button> buttonsList = new ArrayList<>();
+
     private List<String> buttonsData = new ArrayList<>();
     private List<String> buttonsData2 = new ArrayList<>();
+    private List<Integer> buttonsDataInt = new ArrayList<>();
+    private List<Integer> buttonsDataInt2 = new ArrayList<>();
     private Handler handler; //для задержки запуска следующего бойца. Но я думаю, он нам не понадобится, потому что переход будет осуществляться кликом.
     private Animation shakeAnimation; //анимация неправильного заполнения
 
@@ -89,7 +93,25 @@ public class MainActivityFragment extends Fragment {
         buttonDelete = (Button) view.findViewById(R.id.buttonDelete);
         buttonSteer = (Button) view.findViewById(R.id.buttonSteer);
         buttonNext = (Button) view.findViewById(R.id.buttonNext);
-        View.OnClickListener onClickButton = new View.OnClickListener(){
+
+        int c = 0;
+        for(int i = 0; i < 2; i++) {
+            for(int j = 0; j < 7; j++) {
+                Button b = (Button) guessLinearLayouts[i].getChildAt(j);
+                buttonsList.add(c, b);
+                c++;
+            }
+        }
+
+        //View.OnClickListener onClickButton = new View.OnClickListener() {
+
+       // }
+       /* for(int i = 0; i < 2; i++) {
+            for(int k = 0; k < 7; k++) {
+                guessLinearLayouts[i].getChildAt(k).setOnClickListener(onClickButton);
+            }
+        }*/
+        /*View.OnClickListener onClickButton = new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 switch (v.getId()){
@@ -103,7 +125,7 @@ public class MainActivityFragment extends Fragment {
             }
         };
         buttonSteer.setOnClickListener(onClickButton);
-        buttonDelete.setOnClickListener(onClickButton);
+        buttonDelete.setOnClickListener(onClickButton);*/
         return view;
     }
 
@@ -114,21 +136,22 @@ public class MainActivityFragment extends Fragment {
 
     private boolean checkAnswer;
 
-    public void handleClicks(View v, int counter) {
-        int buttonId  = getResources().getIdentifier("cell" + 1, "id", getActivity().getPackageName());
-        Button resetButton  = (Button) getView().findViewById(buttonId);
-        for(int i = 0;i<12;i++) {
-            if (resetButton.getVisibility() == View.VISIBLE) {
-                buttonId  = getResources().getIdentifier("cell" + (i+1), "id", getActivity().getPackageName());
-                resetButton = (Button) getView().findViewById(buttonId);
-            }
-            else {
 
+
+
+
+    public void handleClicks(View v, int counter) {
+        int a = 0;
+        Button resetButton  = (Button) guessLinearLayouts[2].getChildAt(a);
+        for(int i = 0; i <= getFightersName().length(); i++) {
+            a = i;
+            if (resetButton.getVisibility() == View.VISIBLE) {
+                resetButton = (Button) guessLinearLayouts[2].getChildAt(a);
             }
         }
         Button pressedButton = (Button) getView().findViewById(v.getId());
         buttonsData.add(counter, String.valueOf(v.getId())); // ID кнопки снизу
-        buttonsData2.add(counter, String.valueOf(buttonId)); // ID кнопки сверху
+        buttonsDataInt2.add(counter, a); // ID кнопки сверху
         resetButton.setVisibility(View.VISIBLE); //To set visible
         pressedButton.setVisibility(View.INVISIBLE);
         String buttonText = pressedButton.getText().toString();
@@ -138,7 +161,7 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
-    public void Steer(){
+    /*public void Steer(){
         int buttonId = getResources().getIdentifier("cell" + 1, "id", getActivity().getPackageName());
         Button resetButton = (Button) getView().findViewById(buttonId);
         for(int i = 0; i < 12; i++) {
@@ -160,7 +183,7 @@ public class MainActivityFragment extends Fragment {
             checkName();
         }
         setCounter(getCounter() + 1);
-    }
+    }*/
 
 
     public void checkName()
@@ -169,13 +192,12 @@ public class MainActivityFragment extends Fragment {
         answerTextView.setVisibility(View.VISIBLE);
         {
             for (int i = 0; i < getFightersName().length() - 1; i++) {
-                int buttonId = getResources().getIdentifier("cell" + (i + 1), "id", getActivity().getPackageName());
-                Button cellButton = (Button) getView().findViewById(buttonId);
+                Button cellButton = (Button) guessLinearLayouts[2].getChildAt(i);
                 temp = temp + cellButton.getText().toString();
 
             }
 
-            if (getFightersName().substring(1).equalsIgnoreCase(temp)) {
+            if (getFightersName().equalsIgnoreCase(temp)) {
                 checkAnswer = true;
                 answerTextView.setText("RIGHT");
                 animate(checkAnswer);
@@ -187,8 +209,7 @@ public class MainActivityFragment extends Fragment {
 
     public void handleCancel(View v)
     {
-        int downButtonId = Integer.valueOf(buttonsData.get(getCounter()-1));
-        int upButtonId = Integer.valueOf(buttonsData2.get(getCounter()-1));
+        int downButtonId = Integer.valueOf(buttonsData.get(getCounter()));
         Button downButton = (Button) getView().findViewById(downButtonId);
         Button upButton = (Button) getView().findViewById(v.getId());
         downButton.setVisibility(View.VISIBLE); //To set visible
@@ -196,7 +217,6 @@ public class MainActivityFragment extends Fragment {
         String buttonText = upButton.getText().toString();
         downButton.setText(String.valueOf(buttonText));
         setCounter(getCounter() - 1);
-
     }
 
 
@@ -267,7 +287,7 @@ public class MainActivityFragment extends Fragment {
 
     private void loadNextFighter(){
         String nextImage = fileNameList.remove(0);
-        setFightersName(nextImage);
+        setFightersName(nextImage.substring(nextImage.indexOf('-') + 1, nextImage.length()));
         String category = nextImage.substring(0, nextImage.indexOf('-'));
         AssetManager assets = getActivity().getAssets();
         try(InputStream stream = assets.open(category + "/" + nextImage + ".jpg")){
@@ -280,7 +300,7 @@ public class MainActivityFragment extends Fragment {
         }
         Collections.shuffle(fileNameList);
 
-        char[] LastNameQuantity = getFightersName().substring(getFightersName().indexOf('-') + 1, getFightersName().length()).toCharArray();
+        char[] LastNameQuantity = getFightersName().toCharArray();
         char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         for(int row = 0; row < 2; row++) {
             for(int b = 0; b < 7; b ++) {
