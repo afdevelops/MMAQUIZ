@@ -173,22 +173,17 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
+    private String fName = getFightersName();
     public void Steer(){
-        int buttonId = getResources().getIdentifier("cell" + 1, "id", getActivity().getPackageName());
-        Button resetButton = (Button) getView().findViewById(buttonId);
-        for(int i = 0; i < 12; i++) {
-            if(resetButton.getVisibility() == View.VISIBLE) {
-                buttonId = getResources().getIdentifier("cell" + (i + 1), "id", getActivity().getPackageName());
-                resetButton = (Button) getView().findViewById(buttonId);
-            }
-        }
         int pressedButtonId = getResources().getIdentifier("button" + array.get(getSteerRandom()), "id", getActivity().getPackageName());
         Button pressedButton = (Button) getView().findViewById(pressedButtonId);
+        int indexOfLetter = fName.indexOf(pressedButton.getText().toString());
+        Button resetButton = (Button) guessLinearLayouts[2].getChildAt(indexOfLetter);
         buttonsData.add(getCounter(), String.valueOf(pressedButtonId)); //ID кнопки снизу
-         //ID кнопки снизу
         resetButton.setVisibility(View.VISIBLE);
         pressedButton.setVisibility(View.INVISIBLE);
         String buttonText = pressedButton.getText().toString();
+        fName = fName.replaceFirst(buttonText, "*");
         resetButton.setText(String.valueOf(buttonText));
         if(getCounter() == (getFightersName().length() - 1))
         {
@@ -209,11 +204,14 @@ public class MainActivityFragment extends Fragment {
             }
 
             if (getFightersName().equalsIgnoreCase(temp)) {
-                //checkAnswer = true;
+                checkAnswer = true;
                 answerTextView.setText("RIGHT");
-                //animate(checkAnswer);
-
             }
+            else {
+                checkAnswer = false;
+                answerTextView.setText("FALSE");
+            }
+        animate(checkAnswer);
     }
 
     public void handleCancel(View v)
@@ -245,7 +243,7 @@ public class MainActivityFragment extends Fragment {
 
    private List<Integer> arraySteer = new ArrayList<>();
     public int getSteerRandom() {
-        int rnd = new Random().nextInt(getFightersName().length());
+        int rnd = new Random().nextInt(getFightersName().length()-1);
         while(arraySteer.contains(rnd))
         {
             rnd = new Random().nextInt(getFightersName().length());
@@ -309,7 +307,6 @@ public class MainActivityFragment extends Fragment {
         catch (IOException exception) {
             Log.e(TAG, "Error loading " + nextImage, exception);
         }
-        //Collections.shuffle(fileNameList); // тасовка нам не нужна
 
         char[] LastNameQuantity = getFightersName().toCharArray();
         char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
@@ -363,7 +360,7 @@ public class MainActivityFragment extends Fragment {
             animator = ViewAnimationUtils.createCircularReveal(
                     quizLinearLayout, centerX, centerY, 0, radius);
         }
-        animator.setDuration(500); //продолжительность анимации 500 мс
+        animator.setDuration(2000); //продолжительность анимации 500 мс
         animator.start(); //начало анимации
     }
 
