@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -104,6 +105,14 @@ public class MainActivityFragment extends Fragment {
                     case R.id.buttonDelete:
                         deleteLetter();
                         break;
+                    /*case R.id.buttonNext:
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            animate(true);
+                        }
+                    }, 2000);
+                        break;*/
                     case R.id.cell1:
                     case R.id.cell2:
                     case R.id.cell3:
@@ -205,13 +214,27 @@ public class MainActivityFragment extends Fragment {
 
             if (getFightersName().equalsIgnoreCase(temp)) {
                 checkAnswer = true;
+                answerTextView.setTextColor(getResources().getColor(R.color.correct_answer));
                 answerTextView.setText("RIGHT");
+                buttonNext.setVisibility(View.VISIBLE);
+                buttonNext.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        animate(true);
+                    }
+                });
+                /*if(fileNameList.size() != 0) {
+//прописать условия в зависимости от оставшегося количества бойцов
+                }*/
             }
             else {
                 checkAnswer = false;
+                answerTextView.setTextColor(getResources().getColor(R.color.incorrect_answer));
                 answerTextView.setText("FALSE");
+                /*Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(500);*/
+                fighterImageView.startAnimation(shakeAnimation);
             }
-        animate(checkAnswer);
     }
 
     public void handleCancel(View v)
@@ -360,9 +383,7 @@ public class MainActivityFragment extends Fragment {
             animator = ViewAnimationUtils.createCircularReveal(
                     quizLinearLayout, centerX, centerY, 0, radius);
         }
-        animator.setDuration(2000); //продолжительность анимации 500 мс
+        animator.setDuration(2000); //продолжительность анимации 2000 мс
         animator.start(); //начало анимации
     }
-
-
 }

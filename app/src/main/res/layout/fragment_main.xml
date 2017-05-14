@@ -49,14 +49,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell1"
             android:layout_weight="1"
-            android:typeface="serif"
-            android:textAlignment="center"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
-            android:textSize="6sp"
+            android:textSize="8sp"
             android:visibility="invisible"
             android:textStyle="bold"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="2"
@@ -64,15 +64,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell2"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="3"
@@ -80,15 +79,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell3"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="4"
@@ -96,15 +94,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell4"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="5"
@@ -112,15 +109,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell5"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="6"
@@ -128,15 +124,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell6"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="7"
@@ -144,15 +139,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell7"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="8"
@@ -160,15 +154,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell8"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="9"
@@ -176,15 +169,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell9"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="A"
@@ -192,15 +184,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell10"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="C"
@@ -208,15 +199,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell11"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
 
         <Button
             android:text="B"
@@ -224,15 +214,14 @@
             android:layout_height="match_parent"
             android:id="@+id/cell12"
             android:layout_weight="1"
-            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="6sp"
-            android:typeface="serif"
+            android:textSize="8sp"
+            android:typeface="normal"
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:onClick="handleCancel"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:lineSpacingExtra="8sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -419,7 +408,8 @@
             android:layout_weight="0.02"
             android:layout_row="0"
             android:layout_column="2"
-            android:layout_width="40dp" />
+            android:layout_width="40dp"
+            android:visibility="invisible"/>
 
         <Button
             android:text="-1"
