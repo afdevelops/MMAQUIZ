@@ -55,6 +55,7 @@ public class MainActivityFragment extends Fragment {
     public void setCounter(int count){
         this.counter = count;
     }
+    private int fightersNum;
     private List<String> categoryList = new ArrayList<>();
     private boolean checkAnswer;
 
@@ -220,7 +221,12 @@ public class MainActivityFragment extends Fragment {
                 buttonNext.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        animate(true);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                animate(true);
+                            }
+                        }, 1000);
                     }
                 });
                 /*if(fileNameList.size() != 0) {
@@ -231,8 +237,8 @@ public class MainActivityFragment extends Fragment {
                 checkAnswer = false;
                 answerTextView.setTextColor(getResources().getColor(R.color.incorrect_answer));
                 answerTextView.setText("FALSE");
-                /*Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(500);*/
+                Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(500);
                 fighterImageView.startAnimation(shakeAnimation);
             }
     }
@@ -316,8 +322,32 @@ public class MainActivityFragment extends Fragment {
         loadNextFighter();
     }
 
+    private void dropData() {
+        buttonsData.clear();
+        setCounter(0);
+        buttonsData2.clear();
+        for(int row = 0; row < 2; row++) {
+            for (int b = 0; b < 7; b++) {
+                Button nButton = (Button) guessLinearLayouts[row].getChildAt(b);
+                nButton.setVisibility(View.VISIBLE);
+            }
+        }
+        for(int i = 0; i < 12; i++) {
+            Button b = (Button) guessLinearLayouts[2].getChildAt(i);
+            b.setText("");
+            b.setVisibility(View.INVISIBLE);
+        }
+        answerTextView.setVisibility(View.INVISIBLE);
+        buttonNext.setVisibility(View.INVISIBLE);
+        fightersNum = fightersNum + 1;
+    }
+
     private void loadNextFighter(){
-        String nextImage = fileNameList.remove(0);
+    dropData();
+
+
+        String nextImage = fileNameList.get(10);
+        fileNameList.remove(10);
         setFightersName(nextImage.substring(nextImage.indexOf('-') + 1, nextImage.length()));
         String category = nextImage.substring(0, nextImage.indexOf('-'));
         levelNameTextVeiw.setText(category);
@@ -338,6 +368,7 @@ public class MainActivityFragment extends Fragment {
                 Random r = new Random();
                 int rand = r.nextInt(25);
                 Button newButton = (Button) guessLinearLayouts[row].getChildAt(b);
+                newButton.setVisibility(View.VISIBLE);
                 newButton.setEnabled(true);
                 newButton.setText(String.valueOf(alphabet[rand]));
             }
