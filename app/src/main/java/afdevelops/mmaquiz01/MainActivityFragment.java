@@ -55,9 +55,8 @@ public class MainActivityFragment extends Fragment {
     public void setCounter(int count){
         this.counter = count;
     }
-    private int fightersNum;
     private List<String> categoryList = new ArrayList<>();
-    private boolean checkAnswer;
+    private int checkAnswer;
 
     private List<String> buttonsData = new ArrayList<>();
     private List<String> buttonsData2 = new ArrayList<>();
@@ -214,7 +213,7 @@ public class MainActivityFragment extends Fragment {
             }
 
             if (getFightersName().equalsIgnoreCase(temp)) {
-                checkAnswer = true;
+                checkAnswer = 1;
                 answerTextView.setTextColor(getResources().getColor(R.color.correct_answer));
                 answerTextView.setText("RIGHT");
                 buttonNext.setVisibility(View.VISIBLE);
@@ -234,7 +233,6 @@ public class MainActivityFragment extends Fragment {
                 }*/
             }
             else {
-                checkAnswer = false;
                 answerTextView.setTextColor(getResources().getColor(R.color.incorrect_answer));
                 answerTextView.setText("FALSE");
                 Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -324,6 +322,8 @@ public class MainActivityFragment extends Fragment {
 
     private void dropData() {
         buttonsData.clear();
+        array.clear();
+        arraySteer.clear();
         setCounter(0);
         buttonsData2.clear();
         for(int row = 0; row < 2; row++) {
@@ -337,17 +337,17 @@ public class MainActivityFragment extends Fragment {
             b.setText("");
             b.setVisibility(View.INVISIBLE);
         }
+        answerTextView.setText("answer");
         answerTextView.setVisibility(View.INVISIBLE);
         buttonNext.setVisibility(View.INVISIBLE);
-        fightersNum = fightersNum + 1;
     }
 
     private void loadNextFighter(){
     dropData();
 
 
-        String nextImage = fileNameList.get(10);
-        fileNameList.remove(10);
+        String nextImage = fileNameList.get(0);
+        fileNameList.remove(0);
         setFightersName(nextImage.substring(nextImage.indexOf('-') + 1, nextImage.length()));
         String category = nextImage.substring(0, nextImage.indexOf('-'));
         levelNameTextVeiw.setText(category);
@@ -392,7 +392,7 @@ public class MainActivityFragment extends Fragment {
     }
 // method
     private void animate(boolean animateOut){
-        if(checkAnswer == false){
+        if(checkAnswer == 0){
             return;
         }
         int centerX = (quizLinearLayout.getLeft() + quizLinearLayout.getRight()) / 2;
@@ -414,7 +414,7 @@ public class MainActivityFragment extends Fragment {
             animator = ViewAnimationUtils.createCircularReveal(
                     quizLinearLayout, centerX, centerY, 0, radius);
         }
-        animator.setDuration(2000); //продолжительность анимации 2000 мс
+        animator.setDuration(1000); //продолжительность анимации 1000 мс
         animator.start(); //начало анимации
     }
 }
