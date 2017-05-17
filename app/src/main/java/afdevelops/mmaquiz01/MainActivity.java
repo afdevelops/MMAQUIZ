@@ -6,11 +6,15 @@ package afdevelops.mmaquiz01;
 
  	— Глава 64, строка 12*/
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -23,7 +27,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import java.util.Random;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,15 +48,15 @@ public class MainActivity extends AppCompatActivity {
     private boolean preferencesChanged = true;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_main);
-
 
         int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK; //определение размера экрана
         if(screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE ||
@@ -59,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
-
     }
 
     @Override
@@ -69,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivityFragment quizFragment = (MainActivityFragment)
                     getSupportFragmentManager().findFragmentById(R.id.quizFragment);
             quizFragment.resetQuiz();
-
+            playBruceBuffer();
     }
 
     @Override
@@ -83,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    private void playBruceBuffer()
+    {
+        MediaPlayer mp = MediaPlayer.create(this,R.raw.bb);
+        mp.start();
+
+    }
+
 
 
 
