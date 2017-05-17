@@ -232,26 +232,7 @@ public class MainActivityFragment extends Fragment {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        DialogFragment interestingFact = new DialogFragment() {
 
-                            public Dialog OnCreateDialog(Bundle bundle) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                loadInterestingFact();
-                                for (int i = 0; i < 3; i++) {
-                                    builder.setMessage(interestingFactsList.get(i));
-                                }
-                                builder.setPositiveButton(R.string.load_next_fighter,
-                                        new DialogInterface.OnClickListener(){
-                                            public void onClick(DialogInterface dialog, int id){
-                                                loadNextFighter();
-                                            }
-                                        }
-                                );
-                                return builder.create();
-                            }
-                        };
-                        interestingFact.setCancelable(false);
-                        interestingFact.show(getFragmentManager(), "Интересный факт");
                     }
                 }, 1000);
 //прописать условия в зависимости от оставшегося количества бойцов
@@ -358,6 +339,7 @@ public class MainActivityFragment extends Fragment {
 
     private void dropData() {
         buttonsData.clear();
+        interestingFactsList.clear();
         array.clear();
         arraySteer.clear();
         setCounter(0);
