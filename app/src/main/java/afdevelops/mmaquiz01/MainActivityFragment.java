@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -150,7 +151,7 @@ public class MainActivityFragment extends Fragment {
                 Button b = (Button) guessLinearLayouts[1].getChildAt(i-8);
                 b.setOnClickListener(onClickButton);
         }
-
+        setBackground();
 
         return view;
 
@@ -417,5 +418,16 @@ public class MainActivityFragment extends Fragment {
         }
         animator.setDuration(1000); //продолжительность анимации 1000 мс
         animator.start(); //начало анимации
+    }
+
+    private void setBackground()
+    {
+        final LinearLayout background = quizLinearLayout;
+        Resources res = getResources();
+        final TypedArray myImages = res.obtainTypedArray(R.array.myImages);
+        final Random random = new Random();
+        int randomInt = random.nextInt(myImages.length());
+        int drawableID = myImages.getResourceId(randomInt, -1);
+        background.setBackgroundResource(drawableID);
     }
 }
