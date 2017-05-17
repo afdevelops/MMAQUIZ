@@ -6,6 +6,7 @@ package afdevelops.mmaquiz01;
 
  	— Глава 64, строка 12*/
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -13,6 +14,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean preferencesChanged = true;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
 
         int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK; //определение размера экрана
         if(screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE ||
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             MainActivityFragment quizFragment = (MainActivityFragment)
                     getSupportFragmentManager().findFragmentById(R.id.quizFragment);
             quizFragment.resetQuiz();
-
+            playBruceBuffer();
     }
 
     @Override
@@ -87,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
         else{
             return false;
         }
+    }
+
+    private void playBruceBuffer()
+    {
+        MediaPlayer mp = MediaPlayer.create(this,R.raw.bb);
+        mp.start();
+
     }
 
 
