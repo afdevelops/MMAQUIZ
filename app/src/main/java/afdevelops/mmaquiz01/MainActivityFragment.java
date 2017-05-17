@@ -17,6 +17,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -69,10 +70,13 @@ public class MainActivityFragment extends Fragment {
     private ImageView fighterImageView; //Изображение бойца
     private TextView answerTextView;
     private LinearLayout[] guessLinearLayouts; //ряды с кнопками для выбора букв
-    Button buttonSteer;
-    Button buttonDelete;
-    Button buttonNext;
-
+    private Button buttonSteer;
+    private Button buttonDelete;
+    private Button buttonNext;
+    private String levelName;
+    public String getLevelName() {
+        return levelName;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -232,7 +236,8 @@ public class MainActivityFragment extends Fragment {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
+                        Intent intent = new Intent(getActivity(), InterestingFactActivity.class);
+                        startActivity(intent);
                     }
                 }, 1000);
 //прописать условия в зависимости от оставшегося количества бойцов
@@ -246,7 +251,7 @@ public class MainActivityFragment extends Fragment {
             }
     }
 
-    public void handleCancel(View v)
+    private void handleCancel(View v)
     {
         int downButtonId = Integer.valueOf(buttonsData.get(getCounter()-1));
         Button downButton = (Button) getView().findViewById(downButtonId);
@@ -362,7 +367,7 @@ public class MainActivityFragment extends Fragment {
     }
     private String nameOfTheTxtFile;
 
-    private void loadNextFighter(){
+    public void loadNextFighter(){
     dropData();
 
 
@@ -372,6 +377,7 @@ public class MainActivityFragment extends Fragment {
         setFightersName(nextImage.substring(nextImage.indexOf('-') + 1, nextImage.length()));
         String category = nextImage.substring(0, nextImage.indexOf('-'));
         levelNameTextVeiw.setText(category);
+        levelName = category;
         AssetManager assets = getActivity().getAssets();
         try(InputStream stream = assets.open(category + "/" + nextImage + ".jpg")){
             Drawable fighter = Drawable.createFromStream(stream, nextImage);

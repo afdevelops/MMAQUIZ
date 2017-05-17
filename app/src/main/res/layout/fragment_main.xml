@@ -5,10 +5,6 @@
     android:id="@+id/quizLinearLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="4dp"
-    android:paddingLeft="1dp"
-    android:paddingRight="1dp"
-    android:paddingTop="4dp"
     tools:context="afdevelops.mmaquiz01.MainActivityFragment"
     tools:showIn="@layout/activity_main"
     android:orientation="vertical">
@@ -52,8 +48,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="2"
@@ -64,8 +59,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="3"
@@ -76,8 +70,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="4"
@@ -88,8 +81,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="5"
@@ -100,8 +92,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="6"
@@ -112,8 +103,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="7"
@@ -124,8 +114,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="8"
@@ -136,8 +125,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="9"
@@ -148,8 +136,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="A"
@@ -160,8 +147,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="C"
@@ -172,8 +158,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
 
         <Button
             android:text="B"
@@ -184,8 +169,7 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            android:fontFamily="sans-serif-medium" />
     </LinearLayout>
 
     <LinearLayout
