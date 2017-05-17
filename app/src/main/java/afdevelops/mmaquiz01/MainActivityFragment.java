@@ -202,7 +202,7 @@ public class MainActivityFragment extends Fragment {
     }
 
 
-    public void checkName()
+    private void checkName()
     {
         String temp = "";
         answerTextView.setVisibility(View.VISIBLE);
@@ -216,7 +216,7 @@ public class MainActivityFragment extends Fragment {
                 checkAnswer = 1;
                 answerTextView.setTextColor(getResources().getColor(R.color.correct_answer));
                 answerTextView.setText("RIGHT");
-                buttonNext.setVisibility(View.VISIBLE);
+               /*buttonNext.setVisibility(View.VISIBLE);
                 buttonNext.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -227,10 +227,33 @@ public class MainActivityFragment extends Fragment {
                             }
                         }, 1000);
                     }
-                });
-                /*if(fileNameList.size() != 0) {
+                });*/
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DialogFragment interestingFact = new DialogFragment() {
+
+                            public Dialog OnCreateDialog(Bundle bundle) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                loadInterestingFact();
+                                for (int i = 0; i < 3; i++) {
+                                    builder.setMessage(interestingFactsList.get(i));
+                                }
+                                builder.setPositiveButton(R.string.load_next_fighter,
+                                        new DialogInterface.OnClickListener(){
+                                            public void onClick(DialogInterface dialog, int id){
+                                                loadNextFighter();
+                                            }
+                                        }
+                                );
+                                return builder.create();
+                            }
+                        };
+                        interestingFact.setCancelable(false);
+                        interestingFact.show(getFragmentManager(), "Интересный факт");
+                    }
+                }, 1000);
 //прописать условия в зависимости от оставшегося количества бойцов
-                }*/
             }
             else {
                 answerTextView.setTextColor(getResources().getColor(R.color.incorrect_answer));
@@ -295,9 +318,21 @@ public class MainActivityFragment extends Fragment {
         deletedButton.setVisibility(View.INVISIBLE);
     }
 
+    private List<String> interestingFactsList = new ArrayList<>();
+    private void loadInterestingFact() {
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new InputStreamReader(getActivity().getAssets().open("InterestingFacts/" + nameOfTheTxtFile + ".txt")));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                interestingFactsList.add(line);
+            }
+        }catch (IOException exception){}
+    }
+
     public void resetQuiz(){
         AssetManager assets = getActivity().getAssets();
-        fileNameList.clear();
+        fileNameList.clear();                                //ВОЗМОЖНО, ЭТА СТРОКА НАМ НЕ НУЖНА
         categoryList.add("FLYWEIGHT");
         categoryList.add("BANTAMWEIGHT");
         categoryList.add("FEATHERWEIGHT");
@@ -340,8 +375,9 @@ public class MainActivityFragment extends Fragment {
         answerTextView.setText("answer");
         answerTextView.setVisibility(View.INVISIBLE);
         buttonNext.setVisibility(View.INVISIBLE);
-
+        nameOfTheTxtFile = "";
     }
+    private String nameOfTheTxtFile;
 
     private void loadNextFighter(){
     dropData();
@@ -349,6 +385,7 @@ public class MainActivityFragment extends Fragment {
 
         String nextImage = fileNameList.get(0);
         fileNameList.remove(0);
+        nameOfTheTxtFile = nextImage;
         setFightersName(nextImage.substring(nextImage.indexOf('-') + 1, nextImage.length()));
         String category = nextImage.substring(0, nextImage.indexOf('-'));
         levelNameTextVeiw.setText(category);

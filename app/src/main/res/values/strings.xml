@@ -7,6 +7,7 @@
     <string name="fighters_categories_description">Categories to include in the quiz</string>
     <string name="guess_fighter">Guess the fighter</string>
     <string name="results">%1$d guesses, %2$.02f%% correct</string>
+    <string name="load_next_fighter">Next fighter</string>
     <string name="incorrect_answer">Incorrect!</string>
     //default fighters name
     //restarting quiz
