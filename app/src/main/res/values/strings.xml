@@ -15,4 +15,8 @@
     <string name="image_description">Image of the current fighter in the quiz</string>
     <string name="default_category">FLYWEIGHT</string>
     <string name="title_activity_settings">Settings</string>
+
+    <string name="title_activity_opening_menu">OpeningMenuActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
