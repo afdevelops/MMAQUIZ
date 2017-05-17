@@ -340,6 +340,7 @@ public class MainActivityFragment extends Fragment {
         answerTextView.setText("answer");
         answerTextView.setVisibility(View.INVISIBLE);
         buttonNext.setVisibility(View.INVISIBLE);
+
     }
 
     private void loadNextFighter(){
