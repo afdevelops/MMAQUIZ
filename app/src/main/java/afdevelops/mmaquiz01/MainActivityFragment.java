@@ -265,7 +265,6 @@ public class MainActivityFragment extends Fragment {
     }
 
 
-
     private List<Integer> array = new ArrayList<>();
     public int getRandom() {
 
@@ -418,7 +417,7 @@ public class MainActivityFragment extends Fragment {
         }
     }
 // method
-    private void animate(boolean animateOut){
+    public void animate(boolean animateOut){
         if(checkAnswer == 0){
             return;
         }

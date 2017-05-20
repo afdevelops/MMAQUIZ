@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="afdevelops.mmaquiz01.InterestingFactActivity"
-    android:theme="@style/Theme.Transparent">
+    android:theme="@style/AppTheme.NoActionBar"
+    android:background="@android:color/transparent">
 
     <TextView
         android:text="name"

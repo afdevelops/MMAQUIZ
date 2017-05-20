@@ -30,7 +30,7 @@
         <activity
             android:name=".InterestingFactActivity"
             android:label="Facts"
-            android:theme="@style/Theme.Transparent">
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.InterestingFactsActivity" />
 

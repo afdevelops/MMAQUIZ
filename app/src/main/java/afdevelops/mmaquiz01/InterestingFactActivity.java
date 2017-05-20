@@ -13,8 +13,6 @@ public class InterestingFactActivity extends AppCompatActivity {
     private Button nextFighterButton;
     MainActivityFragment quizFragment = (MainActivityFragment)
             getSupportFragmentManager().findFragmentById(R.id.quizFragment);
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +26,16 @@ public class InterestingFactActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.buttonNextFighter:
-                        quizFragment.loadNextFighter();
+                        quizFragment.animate(true);
+                        break;
                 }
             }
         };
+        nextFighterButton.setOnClickListener(onClickButton);
         changeText();
     }
     private void changeText() {
+
         categoryTextView.setText(quizFragment.getLevelName());
         surnameTextView.setText(quizFragment.getFightersName());
     }
