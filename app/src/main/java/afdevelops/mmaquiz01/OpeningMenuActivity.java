@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class OpeningMenuActivity extends AppCompatActivity {
         actionBar.hide();
         setContentView(R.layout.activity_opening_menu);
         setBackground();
+        playBruceBuffer();
         Button btn = (Button) findViewById(R.id.button16);
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +63,12 @@ public class OpeningMenuActivity extends AppCompatActivity {
         int randomInt = random.nextInt(myImages.length());
         int drawableID = myImages.getResourceId(randomInt, -1);
         background.setBackgroundResource(drawableID);
+    }
+    private void playBruceBuffer()
+    {
+        MediaPlayer mp = MediaPlayer.create(this,R.raw.bb);
+        mp.start();
+
     }
 
 

@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-            //запускает quiz после того, как изменились настройки(В КНИГЕ НАПИСАНО, ЧТО ЗАПУСКАЕТ ПОСЛЕ ИЗМЕНЕНИЯ НАСТРОЕК, НО НАСТРОЕК У НАС НЕТ, ПОЭТОМУ ЗАПУСКАЕТ В ЗАВИСИМОСТИ ОТ ПЕРЕМЕННОЙ fightersNumber(в блокноте записана как "l"))
+            //запускает quiz
             MainActivityFragment quizFragment = (MainActivityFragment)
                     getSupportFragmentManager().findFragmentById(R.id.quizFragment);
-            playBruceBuffer();
+            //playBruceBuffer();
             quizFragment.resetQuiz();
     }
 
@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void playBruceBuffer()
+    /*private void playBruceBuffer()
     {
         MediaPlayer mp = MediaPlayer.create(this,R.raw.bb);
         mp.start();
 
-    }
+    }*/
 
 
 

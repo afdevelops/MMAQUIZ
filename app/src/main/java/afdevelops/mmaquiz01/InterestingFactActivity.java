@@ -1,13 +1,15 @@
 package afdevelops.mmaquiz01;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.content.Context;
 
-public class InterestingFactActivity extends AppCompatActivity {
+public class InterestingFactActivity extends MainActivity {
     private TextView surnameTextView;
     private TextView categoryTextView;
     private Button nextFighterButton;
@@ -26,13 +28,15 @@ public class InterestingFactActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.buttonNextFighter:
-                        quizFragment.animate(true);
+                        Intent intent = new Intent(getBaseContext(), MainActivityFragment.class);
+                        startActivity(intent);
+                        quizFragment.loadNextFighter();
                         break;
                 }
             }
         };
         nextFighterButton.setOnClickListener(onClickButton);
-        changeText();
+        //changeText();
     }
     private void changeText() {
 

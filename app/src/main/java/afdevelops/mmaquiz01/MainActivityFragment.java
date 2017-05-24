@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.zip.Inflater;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -221,7 +222,7 @@ public class MainActivityFragment extends Fragment {
                 checkAnswer = 1;
                 answerTextView.setTextColor(getResources().getColor(R.color.correct_answer));
                 answerTextView.setText("RIGHT");
-               /*buttonNext.setVisibility(View.VISIBLE);
+               buttonNext.setVisibility(View.VISIBLE);
                 buttonNext.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -232,14 +233,14 @@ public class MainActivityFragment extends Fragment {
                             }
                         }, 1000);
                     }
-                });*/
-                handler.postDelayed(new Runnable() {
+                });
+                /*handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(getActivity(), InterestingFactActivity.class);
                         startActivity(intent);
                     }
-                }, 1000);
+                }, 1000);*/
 //прописать условия в зависимости от оставшегося количества бойцов
             }
             else {
@@ -299,6 +300,7 @@ public class MainActivityFragment extends Fragment {
 
 
     public void deleteLetter(){ //метод для удаления одной буквы - подсказка. Нужно пользоваться методом getRandom() и сделать невидимой одну рандомную кнопку.
+
         int deletedButtonId = getResources().getIdentifier("button" + getRandom(), "id", getActivity().getPackageName());
         Button deletedButton = (Button) getView().findViewById(deletedButtonId);
         deletedButton.setVisibility(View.INVISIBLE);
@@ -318,7 +320,7 @@ public class MainActivityFragment extends Fragment {
 
     public void resetQuiz(){
         AssetManager assets = getActivity().getAssets();
-        fileNameList.clear();                                //ВОЗМОЖНО, ЭТА СТРОКА НАМ НЕ НУЖНА
+        fileNameList.clear();
         categoryList.add("FLYWEIGHT");
         categoryList.add("BANTAMWEIGHT");
         categoryList.add("FEATHERWEIGHT");
@@ -416,7 +418,7 @@ public class MainActivityFragment extends Fragment {
             b.setText(String.valueOf(LastNameQuantity[i]));
         }
     }
-// method
+
     public void animate(boolean animateOut){
         if(checkAnswer == 0){
             return;
