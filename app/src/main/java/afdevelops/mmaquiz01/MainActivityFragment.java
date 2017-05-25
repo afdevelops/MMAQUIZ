@@ -208,6 +208,7 @@ public class MainActivityFragment extends Fragment {
     }
 
 
+
     private void checkName()
     {
         String temp = "";
@@ -220,6 +221,7 @@ public class MainActivityFragment extends Fragment {
 
             if (getFightersName().equalsIgnoreCase(temp)) {
                 checkAnswer = 1;
+                ableButtons(false, 3);
                 answerTextView.setTextColor(getResources().getColor(R.color.correct_answer));
                 answerTextView.setText("RIGHT");
                buttonNext.setVisibility(View.VISIBLE);
@@ -241,9 +243,9 @@ public class MainActivityFragment extends Fragment {
                         startActivity(intent);
                     }
                 }, 1000);*/
-//прописать условия в зависимости от оставшегося количества бойцов
             }
             else {
+                ableButtons(false, 2);
                 answerTextView.setTextColor(getResources().getColor(R.color.incorrect_answer));
                 answerTextView.setText("FALSE");
                 Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -254,6 +256,7 @@ public class MainActivityFragment extends Fragment {
 
     private void handleCancel(View v)
     {
+        ableButtons(true, 3);
         int downButtonId = Integer.valueOf(buttonsData.get(getCounter()-1));
         Button downButton = (Button) getView().findViewById(downButtonId);
         Button upButton = (Button) getView().findViewById(v.getId());
@@ -262,7 +265,6 @@ public class MainActivityFragment extends Fragment {
         String buttonText = upButton.getText().toString();
         downButton.setText(String.valueOf(buttonText));
         setCounter(getCounter() - 1);
-
     }
 
 
@@ -361,6 +363,7 @@ public class MainActivityFragment extends Fragment {
             b.setText("");
             b.setVisibility(View.INVISIBLE);
         }
+        ableButtons(true, 3);
         answerTextView.setText("answer");
         answerTextView.setVisibility(View.INVISIBLE);
         buttonNext.setVisibility(View.INVISIBLE);
@@ -419,6 +422,20 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
+    private void ableButtons(boolean bool, int r)
+    //блокирует кнопки с буквами и подсказками
+    {
+        for(int row = 0; row < r; row++) {
+            for(int b = 0; b < guessLinearLayouts[row].getChildCount(); b++) {
+                guessLinearLayouts[row].getChildAt(b).setEnabled(bool);
+            }
+        }
+        Button steer = (Button) getView().findViewById(R.id.buttonSteer);
+        Button delete = (Button) getView().findViewById(R.id.buttonDelete);
+        steer.setEnabled(bool);
+        delete.setEnabled(bool);
+    }
+
     public void animate(boolean animateOut){
         if(checkAnswer == 0){
             return;
@@ -429,14 +446,19 @@ public class MainActivityFragment extends Fragment {
         Animator animator;
         if(animateOut) {
             animator = ViewAnimationUtils.createCircularReveal(quizLinearLayout, centerX, centerY, radius, 0);
-            animator.addListener(
-                    new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            loadNextFighter();
+            if(fileNameList.size() != 0) {
+                animator.addListener(
+                        new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                loadNextFighter();
+                            }
                         }
-                    }
-            );
+                );
+            }
+            else {
+
+            }
         }
         else {
             animator = ViewAnimationUtils.createCircularReveal(
