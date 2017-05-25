@@ -29,5 +29,17 @@
             android:minHeight="91dp"
             android:minWidth="145dip"
             android:onClick="startButton"/>
+
+        <TextView
+            android:text="©A&F Develops, 2017, all rights reserved"
+            android:layout_marginBottom="28dp"
+            android:id="@+id/textView"
+            android:layout_marginStart="76dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/button16"
+            android:layout_width="160dp"
+            android:textSize="10sp"
+            android:layout_alignParentEnd="true"
+            android:layout_height="20dp" />
     </RelativeLayout>
 </FrameLayout>

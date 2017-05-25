@@ -308,7 +308,6 @@ public class MainActivityFragment extends Fragment {
         this.fightersName = name;
     }
 
-
     public void deleteLetter(){ //метод для удаления одной буквы - подсказка. Нужно пользоваться методом getRandom() и сделать невидимой одну рандомную кнопку.
 
         int deletedButtonId = getResources().getIdentifier("button" + getRandom(), "id", getActivity().getPackageName());
