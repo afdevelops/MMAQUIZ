@@ -68,8 +68,10 @@ public class MainActivityFragment extends Fragment {
 
     private LinearLayout quizLinearLayout; //Макет с quiz'ом
     private TextView levelNameTextVeiw;
-    private ImageView fighterImageView; //Изображение бойца
     private TextView answerTextView;
+    private ImageView fighterImageView; //Изображение бойца
+    private Button resetButton;
+    private TextView textViewRightAnswer;
     private LinearLayout[] guessLinearLayouts; //ряды с кнопками для выбора букв
     private Button buttonSteer;
     private Button buttonDelete;
@@ -96,8 +98,10 @@ public class MainActivityFragment extends Fragment {
         guessLinearLayouts[0] = (LinearLayout) view.findViewById(R.id.row2LinearLayout);
         guessLinearLayouts[1] = (LinearLayout) view.findViewById(R.id.row3LinearLayout);
         guessLinearLayouts[2] = (LinearLayout) view.findViewById(R.id.row1LinearLayout);
-        answerTextView = (TextView) view.findViewById(R.id.answerTextView);
+        resetButton = (Button) view.findViewById(R.id.buttonReset);
+        textViewRightAnswer = (TextView) view.findViewById(R.id.textViewRightAnswer);
         levelNameTextVeiw = (TextView) view.findViewById(R.id.levelNameTextView);
+        answerTextView = (TextView) view.findViewById(R.id.answerTextView);
         buttonDelete = (Button) view.findViewById(R.id.buttonDelete);
         buttonSteer = (Button) view.findViewById(R.id.buttonSteer);
         buttonNext = (Button) view.findViewById(R.id.buttonNext);
@@ -111,14 +115,9 @@ public class MainActivityFragment extends Fragment {
                     case R.id.buttonDelete:
                         deleteLetter();
                         break;
-                    /*case R.id.buttonNext:
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            animate(true);
-                        }
-                    }, 2000);
-                        break;*/
+                    case R.id.buttonReset:
+                        resetQuiz();
+                        break;
                     case R.id.cell1:
                     case R.id.cell2:
                     case R.id.cell3:
@@ -223,8 +222,11 @@ public class MainActivityFragment extends Fragment {
                 checkAnswer = 1;
                 ableButtons(false, 3);
                 answerTextView.setTextColor(getResources().getColor(R.color.correct_answer));
-                answerTextView.setText("RIGHT");
-               buttonNext.setVisibility(View.VISIBLE);
+                answerTextView.setText("Отлично! Ты отгадал бойца!");
+                textViewRightAnswer.setVisibility(View.VISIBLE);
+                textViewRightAnswer.setText(interestingFactsList.get(0) + "\n" + interestingFactsList.get(1) + "\n" + interestingFactsList.get(2));
+            if(fileNameList.size() != 0) {
+                buttonNext.setVisibility(View.VISIBLE);
                 buttonNext.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -244,10 +246,15 @@ public class MainActivityFragment extends Fragment {
                     }
                 }, 1000);*/
             }
+                else {
+                resetButton.setVisibility(View.VISIBLE);
+            }
+
+            }
             else {
                 ableButtons(false, 2);
                 answerTextView.setTextColor(getResources().getColor(R.color.incorrect_answer));
-                answerTextView.setText("FALSE");
+                answerTextView.setText("Неверно! Попробуй ещё раз.");
                 Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(500);
                 fighterImageView.startAnimation(shakeAnimation);
@@ -366,6 +373,8 @@ public class MainActivityFragment extends Fragment {
         ableButtons(true, 3);
         answerTextView.setText("answer");
         answerTextView.setVisibility(View.INVISIBLE);
+        textViewRightAnswer.setText("fact");
+        textViewRightAnswer.setVisibility(View.INVISIBLE);
         buttonNext.setVisibility(View.INVISIBLE);
         nameOfTheTxtFile = "";
     }
@@ -373,6 +382,7 @@ public class MainActivityFragment extends Fragment {
 
     public void loadNextFighter(){
     dropData();
+
 
 
         String nextImage = fileNameList.get(0);
@@ -420,6 +430,7 @@ public class MainActivityFragment extends Fragment {
             b.setEnabled(true);
             b.setText(String.valueOf(LastNameQuantity[i]));
         }
+        loadInterestingFact();
     }
 
     private void ableButtons(boolean bool, int r)
@@ -430,10 +441,8 @@ public class MainActivityFragment extends Fragment {
                 guessLinearLayouts[row].getChildAt(b).setEnabled(bool);
             }
         }
-        Button steer = (Button) getView().findViewById(R.id.buttonSteer);
-        Button delete = (Button) getView().findViewById(R.id.buttonDelete);
-        steer.setEnabled(bool);
-        delete.setEnabled(bool);
+        buttonSteer.setEnabled(bool);
+        buttonDelete.setEnabled(bool);
     }
 
     public void animate(boolean animateOut){
@@ -446,7 +455,6 @@ public class MainActivityFragment extends Fragment {
         Animator animator;
         if(animateOut) {
             animator = ViewAnimationUtils.createCircularReveal(quizLinearLayout, centerX, centerY, radius, 0);
-            if(fileNameList.size() != 0) {
                 animator.addListener(
                         new AnimatorListenerAdapter() {
                             @Override
@@ -455,10 +463,7 @@ public class MainActivityFragment extends Fragment {
                             }
                         }
                 );
-            }
-            else {
 
-            }
         }
         else {
             animator = ViewAnimationUtils.createCircularReveal(
