@@ -238,7 +238,8 @@ public class MainActivityFragment extends Fragment {
                         }, 1000);
                     }
                 });
-                /*handler.postDelayed(new Runnable() {
+                /* - для доп активности с фактами
+                handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(getActivity(), InterestingFactActivity.class);
@@ -327,7 +328,9 @@ public class MainActivityFragment extends Fragment {
         }catch (IOException exception){}
     }
 
-    public void resetQuiz(){
+    public void resetQuiz()
+//рестарт приложения
+    {
         AssetManager assets = getActivity().getAssets();
         fileNameList.clear();
         categoryList.add("FLYWEIGHT");
@@ -380,11 +383,10 @@ public class MainActivityFragment extends Fragment {
     }
     private String nameOfTheTxtFile;
 
-    public void loadNextFighter(){
+    public void loadNextFighter()
+//загрузка активности с новым бойцом
+    {
     dropData();
-
-
-
         String nextImage = fileNameList.get(0);
         fileNameList.remove(0);
         nameOfTheTxtFile = nextImage;
@@ -445,7 +447,8 @@ public class MainActivityFragment extends Fragment {
         buttonDelete.setEnabled(bool);
     }
 
-    public void animate(boolean animateOut){
+    public void animate(boolean animateOut) {
+        //метод анимации
         if(checkAnswer == 0){
             return;
         }
@@ -454,6 +457,7 @@ public class MainActivityFragment extends Fragment {
         int radius = Math.max(quizLinearLayout.getWidth(), quizLinearLayout.getHeight());
         Animator animator;
         if(animateOut) {
+            //активность сворачивается
             animator = ViewAnimationUtils.createCircularReveal(quizLinearLayout, centerX, centerY, radius, 0);
                 animator.addListener(
                         new AnimatorListenerAdapter() {
@@ -463,9 +467,10 @@ public class MainActivityFragment extends Fragment {
                             }
                         }
                 );
-
+//incorrect_shake - если неправильный ответ, фотка трясётся влево-вправо
         }
         else {
+            //активность разворачивается
             animator = ViewAnimationUtils.createCircularReveal(
                     quizLinearLayout, centerX, centerY, 0, radius);
         }
@@ -474,6 +479,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     private void setBackground()
+            //установка рандомного размытого фона
     {
         final LinearLayout background = quizLinearLayout;
         Resources res = getResources();

@@ -63,7 +63,8 @@
             tools:style="@android:style/Widget.Material.Button.Colored"
             android:visibility="invisible"
             android:layout_width="16dp"
-            android:fontFamily="sans-serif-medium" />
+            android:fontFamily="sans-serif-medium"
+            style="@android:style/Widget.DeviceDefault.Button.Inset" />
 
         <Button
             android:text="2"

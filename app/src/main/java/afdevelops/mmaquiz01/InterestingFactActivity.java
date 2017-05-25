@@ -9,6 +9,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.content.Context;
 
+/*
+*
+*
+* прописать эту активность в манифесте, если мы будем её использовать
+* <activity
+            android:name=".InterestingFactActivity"
+            android:label="Facts"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.InterestingFactsActivity" />
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>*/
+
 public class InterestingFactActivity extends MainActivity {
     private TextView surnameTextView;
     private TextView categoryTextView;
